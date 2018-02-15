@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">♣</span>
+    </div>
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound"> </span>
+    </div>
+    <div data-key="66" class="key">
+      <kbd>B</kbd>
+      <span class="sound">♣</span>
+    </div>
+    <div data-key="82" class="key">
+      <kbd>R</kbd>
+      <span class="sound"> </span>
+    </div>
+    <div data-key="79" class="key">
+      <kbd>O</kbd>
+      <span class="sound">♣</span>
+    </div>
+    <div data-key="78" class="key">
+      <kbd>N</kbd>
+      <span class="sound"> </span>
+    </div>
+    <div data-key="73" class="key">
+      <kbd>I</kbd>
+      <span class="sound">♣</span>
+    </div>
+    
+  </div>
+
+  
+  <audio data-key="74" src="wild card bitches\Day Bow Bow Updated.mp3"></audio>
+  <audio data-key="65" src="wild card bitches\Dayman Updated.mp3"></audio>
+  <audio data-key="66" src="wild card bitches\Microbrew Updated.mp3"></audio>
+  <audio data-key="82" src="wild card bitches\Rock Flag And Eagle Updated.mp3"></audio>
+  <audio data-key="79" src="wild card bitches\Vietnam Updated.mp3"></audio>
+  <audio data-key="78" src="wild card bitches\What's Up Bitches Updated.mp3"></audio>
+  <audio data-key="73" src="wild card bitches\Wild Card Bitches Updated.mp3"></audio>
+
+ 
+
+ 
+  <script>
+
+    window.addEventListener('keydown', function(e) {
+       const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+       const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+       if(!audio) return; //stop the function from running all together
+      audio.currentTime= 0; //rewind to start
+       audio.play();
+       key.classList.add('playing');
+
+    });
+
+    function removeTransition(e) {
+      if(e.propertyName !== 'transform') return; //skip if its not a transform
+      
+      this.classList.remove('playing');
+    }
+   const keys = document.querySelectorAll('.key');
+   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+</script>
+
+  
+</body>
+</html>
